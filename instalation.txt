@@ -1,0 +1,37 @@
+## Procedimiento de instalación Garfield++ local en Ubuntu:
+
+1. Pre-requisitos:
+
+	sudo apt update	
+	sudo apt install build-essential --> g++ 
+	sudo apt install gfortran        --> gfortran
+
+	sudo apt install libgsl-dev      --> gls
+	sudo apt install libtbb12
+	sudo apt install libvdt-dev
+
+	sudo apt install cmake
+	sudo apt install clang           --> clang, neceario para la instalación de root (CERN)	
+		
+	descargar .tar.gz de la distro indicada en https://root.cern.ch/releases/release-64000/
+	
+	# Los siguientes pasos hacerlo en la carpeta donde este el archivo .tar.gz, recomedable ~/
+	tar -xzvf root_v6.40.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz 
+	
+	# añadir el siguiente comando en ~/.bashrc
+	source root/bin/thisroot.sh 
+	
+2. Instalación Garfield++:
+
+	export GARFIELD_HOME=$HOME/garfield
+	git clone https://gitlab.cern.ch/garfield/garfieldpp.git $GARFIELD_HOME
+
+	cd $GARFIELD_HOME
+	mkdir build
+	cd build
+	cmake $GARFIELD_HOME
+	# nproc se refiere al numero de cores de tu pc
+	make -j$(nproc)  
+	make install
+
+	source $GARFIELD_HOME/install/share/Garfield/setupGarfield.sh
