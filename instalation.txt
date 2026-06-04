@@ -3,15 +3,15 @@
 1. Pre-requisitos:
 
 	sudo apt update	
-	sudo apt install build-essential --> g++ 
-	sudo apt install gfortran        --> gfortran
+	sudo apt install build-essential 
+	sudo apt install gfortran        
 
-	sudo apt install libgsl-dev      --> gls
+	sudo apt install libgsl-dev     
 	sudo apt install libtbb12
 	sudo apt install libvdt-dev
 
 	sudo apt install cmake
-	sudo apt install clang           --> clang, neceario para la instalación de root (CERN)	
+	sudo apt install clang	
 		
 	descargar .tar.gz de la distro indicada en https://root.cern.ch/releases/release-64000/
 	
