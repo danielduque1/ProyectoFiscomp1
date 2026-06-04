@@ -23,7 +23,9 @@
 	
 2. Instalación Garfield++:
 
+	# añadir al ~/.bashrc (no olvides ejecutarlo)
 	export GARFIELD_HOME=$HOME/garfield
+
 	git clone https://gitlab.cern.ch/garfield/garfieldpp.git $GARFIELD_HOME
 
 	cd $GARFIELD_HOME
