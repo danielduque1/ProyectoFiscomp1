@@ -1,0 +1,5 @@
+/home/daniel/Workspace/Repositorios/ProyectoFiscomp1/test/Gem/build/CMakeFiles/Gem.dir
+/home/daniel/Workspace/Repositorios/ProyectoFiscomp1/test/Gem/build/CMakeFiles/Gem_mt.dir
+/home/daniel/Workspace/Repositorios/ProyectoFiscomp1/test/Gem/build/CMakeFiles/Fieldlines.dir
+/home/daniel/Workspace/Repositorios/ProyectoFiscomp1/test/Gem/build/CMakeFiles/edit_cache.dir
+/home/daniel/Workspace/Repositorios/ProyectoFiscomp1/test/Gem/build/CMakeFiles/rebuild_cache.dir
