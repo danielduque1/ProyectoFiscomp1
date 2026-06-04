@@ -18,7 +18,7 @@
 	# Los siguientes pasos hacerlo en la carpeta donde este el archivo .tar.gz, recomedable ~/
 	tar -xzvf root_v6.40.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz 
 	
-	# añadir el siguiente comando en ~/.bashrc
+	# añadir el siguiente comando en ~/.bashrc (no olvides ejecutar)
 	source root/bin/thisroot.sh 
 	
 2. Instalación Garfield++:
@@ -33,5 +33,6 @@
 	# nproc se refiere al numero de cores de tu pc
 	make -j$(nproc)  
 	make install
-
+	
+	# añadir al ~/.bashrc (no olvides ejecutar)
 	source $GARFIELD_HOME/install/share/Garfield/setupGarfield.sh
