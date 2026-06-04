@@ -19,7 +19,7 @@
 	tar -xzvf root_v6.40.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz 
 	
 	# añadir el siguiente comando en ~/.bashrc (no olvides ejecutar)
-	source root/bin/thisroot.sh 
+	source $HOME/root/bin/thisroot.sh 
 	
 2. Instalación Garfield++:
 
