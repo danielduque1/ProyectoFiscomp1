@@ -44,5 +44,5 @@
 	# Agregas ppa al apt que contiene el proyecto Elmer
 	sudo add-apt-repository ppa:elmer-csc-ubuntu/elmer-csc-ppa
 	sudo apt update
-	sudo apt update
 	sudo apt install elmerfem-csc-eg
+	sudo apt install gmsh
