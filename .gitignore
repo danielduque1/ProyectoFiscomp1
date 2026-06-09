@@ -215,3 +215,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Archivos de mallas y simulación pesados
+*.msh
+*.vtu
+*.nodes
