@@ -1,0 +1,78 @@
+Check Keywords Warn
+
+$Vwire = 1500  ! Voltaje de operación del ánodo en Voltios
+
+Header
+  Mesh DB "." "drift_tube"
+End
+
+Simulation
+  Coordinate System = "Cartesian 2D"
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady state
+  Steady State Max Iterations = 1
+  Output Intervals = 1
+  
+  ! IMPORTANTE: Prefijo idéntico para que Garfield++ enlace de forma nativa
+  Output File = "drift_tube.result"
+  Post File = "drift_tube.ep"
+End
+
+Constants
+  Permittivity of Vacuum = 8.8542e-12
+  Unit Charge = 1.602e-19
+End
+
+! Cuerpo 1: El espacio del gas (Corresponde al ID 3 "phys_s_gas" en tu .geo)
+Body 1
+  Equation = 1
+  Material = 1
+End
+
+! Cuerpo 2: El cuerpo conductor del alambre (Corresponde al ID 4 "phys_s_wire" en tu .geo)
+Body 2
+  Equation = 1
+  Material = 2
+End
+
+Solver 1
+  Equation = Electrostatics
+  Calculate Electric Energy = True
+  Calculate Electric Field = True
+  Calculate Electric Flux = False
+  Variable = Potential
+  Procedure = "StatElecSolve" "StatElecSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Abort Not Converged = True
+  Linear System Convergence Tolerance = 1.0e-10
+  Linear System Preconditioning = ILU1
+  Steady State Convergence Tolerance = 5.0e-7
+End
+
+Equation 1
+  Active Solvers(1) = 1
+End
+
+! Propiedades del Gas
+Material 1
+  Relative Permittivity = 1
+End
+
+! Propiedades del Alambre (Aproximación de conductor perfecto)
+Material 2
+  Relative Permittivity = 1e10
+End
+
+! Condición de Contorno 1: Cátodo (Tubo exterior, ID 1 "phys_catodo" en tu .geo)
+Boundary Condition 1
+  Target Boundaries(1) = 1
+  Potential = 0
+End
+
+! Condición de Contorno 2: Ánodo (Alambre central, ID 2 "phys_anodo" en tu .geo)
+Boundary Condition 2
+  Target Boundaries(1) = 2
+  Potential = $Vwire
+End

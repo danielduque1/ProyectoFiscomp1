@@ -1,5 +1,0 @@
-! ----- names for bodies -----
-$ Gas = 3
-! ----- names for boundaries -----
-$ Anodo = 1
-$ Catodo = 2
