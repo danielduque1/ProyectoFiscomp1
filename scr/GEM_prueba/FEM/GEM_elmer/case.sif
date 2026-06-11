@@ -1,0 +1,122 @@
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "."
+  Include Path ""
+  Results Directory ""
+End
+
+Simulation
+  Max Output Level = 5
+  Coordinate System = Cartesian
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Output Intervals = 1
+  Solver Input File = case.sif
+  Post File = case.ep
+End
+
+Constants
+  Permittivity Of Vacuum = 8.854187817e-12
+End
+
+Equation 1
+  Name = "Electrostatics"
+  Active Solvers(2) = 1 2
+End
+
+Solver 1
+  Equation = "Stat Elec Solver"
+  Procedure = "StatElecSolve" "StatElecSolver"
+  Variable = Potential
+  Variable DOFs = 1
+
+  Calculate Electric Field = True
+  Calculate Electric Flux = True
+
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Preconditioning = ILU0
+  Linear System Max Iterations = 2000
+  Linear System Convergence Tolerance = 1.0e-10
+
+  Steady State Convergence Tolerance = 1.0e-10
+End
+
+Material 1
+  Name = "Gas_ArCO2_3bar"
+  Relative Permittivity = 1.0
+End
+
+Material 2
+  Name = "Kapton"
+  Relative Permittivity = 3.4
+End
+
+Material 3
+  Name = "Copper"
+  Relative Permittivity = 1.0
+End
+
+Body 1
+  Name = "Gas"
+  Target Bodies(1) = 1
+  Equation = 1
+  Material = 1
+End
+
+Body 2
+  Name = "Kapton"
+  Target Bodies(1) = 2
+  Equation = 1
+  Material = 2
+End
+
+Body 3
+  Name = "Copper_Bottom"
+  Target Bodies(1) = 3
+  Equation = 1
+  Material = 3
+End
+
+Body 4
+  Name = "Copper_Top"
+  Target Bodies(1) = 4
+  Equation = 1
+  Material = 3
+End
+
+Boundary Condition 1
+  Name = "Drift_Plane"
+  Target Boundaries(1) = 1
+  Potential = -800.0
+End
+
+Boundary Condition 2
+  Name = "Induction_Plane"
+  Target Boundaries(1) = 2
+  Potential = 800.0
+End
+
+Boundary Condition 3
+  Name = "Copper_Bottom_Electrode"
+  Target Boundaries(1) = 3
+  Potential = 0.0
+End
+
+Boundary Condition 4
+  Name = "Copper_Top_Electrode"
+  Target Boundaries(1) = 4
+  Potential = -400.0
+End
+
+Solver 2
+  Exec Solver = After Simulation
+  Equation = "ResultOutput"
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+
+  Output File Name = "case_ascii"
+  Vtu Format = Logical True
+  Binary Output = Logical False
+  Single Precision = Logical False
+End

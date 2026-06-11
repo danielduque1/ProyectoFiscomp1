@@ -1,0 +1,10 @@
+! ----- names for bodies -----
+$ Gas_ArCO2_3bar = 1
+$ Kapton = 2
+$ Copper_Bottom = 3
+$ Copper_Top = 4
+! ----- names for boundaries -----
+$ Drift_Plane = 1
+$ Induction_Plane = 2
+$ Copper_Bottom_Electrode = 3
+$ Copper_Top_Electrode = 4
