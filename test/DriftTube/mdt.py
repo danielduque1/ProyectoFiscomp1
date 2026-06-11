@@ -3,6 +3,10 @@ import Garfield
 import math
 import ctypes
 
+import queue
+import threading
+import time
+
 gas = ROOT.Garfield.MediumMagboltz()
 gas.LoadGasFile('ar_93_co2_7_3bar.gas')
 gas.LoadIonMobility('IonMobility_Ar+_Ar.txt')
@@ -63,7 +67,7 @@ rTrack = 0.3
 x0 = rTrack
 y0 = -math.sqrt(rTube * rTube - rTrack * rTrack)
 
-nTracks = 1
+nTracks = 2
 for j in range(nTracks):
   sensor.ClearSignal()
   track.NewTrack(x0, y0, 0, 0, 0, 1, 0)
@@ -83,3 +87,28 @@ for j in range(nTracks):
     sensor.PlotSignal('s', cS)
     cS.Update()
 
+# Keep processing ROOT events until "q" is entered in the terminal.
+commands = queue.Queue()
+
+
+def read_commands():
+    while True:
+        try:
+            command = input("Ingrese q para terminar: ").strip().lower()
+        except EOFError:
+            command = "q"
+        commands.put(command)
+        if command == "q":
+            return
+
+
+threading.Thread(target=read_commands, daemon=True).start()
+
+while True:
+    ROOT.gSystem.ProcessEvents()
+    try:
+        if commands.get_nowait() == "q":
+            break
+    except queue.Empty:
+        pass
+    time.sleep(0.05)
