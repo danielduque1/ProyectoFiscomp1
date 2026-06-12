@@ -1,6 +1,6 @@
 Check Keywords Warn
 
-$Vwire = 1500  ! Voltaje de operación del ánodo en Voltios
+$Vwire = 3100  ! Voltaje de operación del ánodo en Voltios
 
 Header
   Mesh DB "." "drift_tube"

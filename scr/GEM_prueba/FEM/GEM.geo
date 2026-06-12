@@ -235,6 +235,6 @@ Mesh.MeshSizeExtendFromBoundary = 1;
 // Para inspeccionar primero la geometria, deja esta linea comentada.
 // Para generar desde la interfaz grafica: Modules -> Mesh -> 3D.
 // Para terminal: gmsh -3 gem_elmer_ready.geo -format msh2 -o gem.msh
-// Mesh 3;
+Mesh 3;
 
 Show;
