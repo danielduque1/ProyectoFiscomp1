@@ -1,0 +1,34 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = Gas_ArCO2_3bar
+End
+
+Body 2
+  Name = Kapton
+End
+
+Body 3
+  Name = Copper_Bottom
+End
+
+Body 4
+  Name = Copper_Top
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = Drift_Plane
+End
+
+Boundary Condition 2
+  Name = Induction_Plane
+End
+
+Boundary Condition 3
+  Name = Copper_Bottom_Electrode
+End
+
+Boundary Condition 4
+  Name = Copper_Top_Electrode
+End
+

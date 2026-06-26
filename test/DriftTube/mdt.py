@@ -67,7 +67,7 @@ rTrack = 0.3
 x0 = rTrack
 y0 = -math.sqrt(rTube * rTube - rTrack * rTrack)
 
-nTracks = 2
+nTracks = 1
 for j in range(nTracks):
   sensor.ClearSignal()
   track.NewTrack(x0, y0, 0, 0, 0, 1, 0)
