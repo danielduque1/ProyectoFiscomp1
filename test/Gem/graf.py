@@ -18,7 +18,7 @@ def visualizar_histograma(archivo_csv):
     sns.histplot(
         data=df,
         x='Electrones',
-        bins=80,
+        bins=50,
         multiple='layer',
         element='bars',
         stat='count',
@@ -36,7 +36,7 @@ def visualizar_histograma(archivo_csv):
         data=df,
         x='Electrones',
         hue='Energia_etiqueta',
-        bins=80,
+        bins=50,
         multiple='layer',
         element='bars',
         stat='count',
@@ -63,7 +63,7 @@ def visualizar_histograma(archivo_csv):
         sns.histplot(
             data=df_7058,
             x='Electrones',
-            bins=80,
+            bins=50,
             color='crimson',
             edgecolor='black',
             alpha=0.8,
@@ -79,7 +79,5 @@ def visualizar_histograma(archivo_csv):
         print("No hay datos para Energia_eV = 7058.0 después de filtrar Electrones != 0.")
 
 if __name__ == "__main__":
-    archivo1 = "datos_espectro_fe55_colimado_prob_ajust.csv"
-    archivo2 = "datos_espectro_fe55_prob_ajust.csv"
-    visualizar_histograma(archivo1)
-    visualizar_histograma(archivo2)
+    archivo = "datos_espectro_fe55_gem_corregido.csv"
+    visualizar_histograma(archivo)

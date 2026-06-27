@@ -14,6 +14,9 @@ Simulation
   Output Intervals = 1
   Solver Input File = case.sif
   Post File = case.ep
+  
+  ! --- CLAVE DEL ÉXITO: Forzar la salida de texto plano clásica de Elmer ---
+  Output File = "gem.result"
 End
 
 Constants
@@ -22,7 +25,7 @@ End
 
 Equation 1
   Name = "Electrostatics"
-  Active Solvers(2) = 1 2
+  Active Solvers(1) = 1
 End
 
 Solver 1
@@ -43,20 +46,6 @@ Solver 1
   Steady State Convergence Tolerance = 1.0e-10
 End
 
-Solver 2
-  Exec Solver = After Simulation
-  Equation = "ResultOutput"
-  Procedure = "ResultOutputSolve" "ResultOutputSolver"
-
-  Output Format = String "gid"
-  Output File Name = "gem"       
-  
-  Vtu Format = Logical False
-  Binary Output = Logical False
-  Single Precision = Logical False
-End
-
-# --- CONFIGURACIÓN DE MATERIALES ---
 Material 1
   Name = "Gas_ArCO2_3bar"
   Relative Permittivity = 1.0
@@ -69,15 +58,14 @@ End
 
 Material 3
   Name = "Copper_Bottom_Mat"
-  Relative Permittivity = 1.0
+  Relative Permittivity = 1.0e10
 End
 
 Material 4
   Name = "Copper_Top_Mat"
-  Relative Permittivity = 1.0
+  Relative Permittivity = 1.0e10
 End
 
-# --- DECLARACIÓN DE LOS CUERPOS VOLUMÉTRICOS ---
 Body 1
   Name = "Gas"
   Target Bodies(1) = 1
@@ -97,7 +85,7 @@ Body 3
   Target Bodies(1) = 3
   Equation = 1
   Material = 3
-  Body Force = 1  ! Aplica fijación de potencial inferior
+  Body Force = 1
 End
 
 Body 4
@@ -105,27 +93,50 @@ Body 4
   Target Bodies(1) = 4
   Equation = 1
   Material = 4
-  Body Force = 2  ! Aplica fijación de potencial superior
+  Body Force = 2
 End
 
-# --- INYECCIÓN DE VOLTAJES MEDIANTE BODY FORCES ---
-Body Force 1
-  Potential = 0.0
-End
-
-Body Force 2
-  Potential = -400.0
-End
-
-# --- CONDICIONES DE FRONTERA PARA PLANOS EXTREMOS ---
 Boundary Condition 1
   Name = "Drift_Plane"
   Target Boundaries(1) = 1
-  Potential = -800.0
+  Potential = -1100.0       ! Creará un campo de drift limpio hacia la GEM
+End
+
+Body Force 2
+  Name = "Copper_Top"
+  Potential = -850.0
+End
+
+Body Force 1
+  Name = "Copper_Bottom"
+  Potential = -250.0        ! Voltaje Neto GEM = 600 V (Calibrado para vencer los 5 bar)
 End
 
 Boundary Condition 2
   Name = "Induction_Plane"
   Target Boundaries(1) = 2
-  Potential = 800.0
+  Potential = 0.0           ! Plano de lectura a Tierra (Ánodo colector real)
 End
+
+
+!! --- PLANO SUPERIOR DE DRIFT (Z = +1.0 mm) ---
+!Boundary Condition 1
+!  Target Boundaries(1) = 1  
+!  Potential = -670.0        ! Edrift ≈ 1.75 kV/cm (Guía suave hacia el agujero)
+!End
+!
+!! --- COBRE SUPERIOR DE LA GEM (Z = +0.025 mm) ---
+!Body Force 2
+!  Potential = -500.0
+!End
+!
+!! --- COBRE INFERIOR DE LA GEM (Z = -0.025 mm) ---
+!Body Force 1
+!  Potential = 0.0           ! Voltaje GEM Neto = 500 V (¡Suficiente para 3 bar!)
+!End
+!
+!! --- PLANO INFERIOR DE LECTURA (Z = -1.0 mm) ---
+!Boundary Condition 2
+!  Target Boundaries(1) = 2  
+!  Potential = 420.0         ! Eind ≈ 4.3 kV/cm (Máxima extracción hacia el ánodo)
+!End

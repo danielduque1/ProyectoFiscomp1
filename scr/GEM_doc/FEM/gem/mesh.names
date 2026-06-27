@@ -4,7 +4,7 @@ $ Kapton = 2
 $ Copper_Bottom = 3
 $ Copper_Top = 4
 ! ----- names for boundaries -----
-$ Drift_Plane = 11
-$ Induction_Plane = 12
-$ Copper_Bottom_Electrode = 13
-$ Copper_Top_Electrode = 14
+$ Drift_Plane = 1
+$ Induction_Plane = 2
+$ Copper_Bottom_Electrode = 3
+$ Copper_Top_Electrode = 4

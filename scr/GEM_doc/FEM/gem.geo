@@ -169,7 +169,7 @@ Mesh.Algorithm = 6;        // Frontal-Delaunay 2D
 Mesh.Algorithm3D = 1;      // Delaunay 3D nativo uniforme
 Mesh.Optimize = 1;
 Mesh.OptimizeNetgen = 0;   // Evita dependencias externas de Netgen
-Mesh.ElementOrder = 1;     // Elementos lineales (Tetraedros de 4 nodos)
+Mesh.ElementOrder = 2;     
 
 Mesh.MeshSizeMin = lc_hole;
 Mesh.MeshSizeMax = lc_gas;

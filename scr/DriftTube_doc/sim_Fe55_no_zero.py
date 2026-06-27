@@ -61,7 +61,7 @@ def main():
 
     # 4. Configuración del espectro
     fe55_energies = [6403.84, 6390.84, 7058.0]
-    weights = [0.5972, 0.3021, 0.1007]
+    weights = [0.5, 0.15, 0.35]
 
     # Histograma para la versión colimada
     hEspectro = ROOT.TH1F("hEspectro", "Espectro Fe55 Colimado (r=0.2);Electrones;Frecuencia", 100, 0, 500000)
@@ -70,7 +70,7 @@ def main():
     n_eventos = 500
     print(f"\n--- Iniciando captura de {n_eventos} eventos COLIMADOS (r = 0.2 cm) ---")
 
-    with open("datos_espectro_fe55_colimado.csv", "w", newline="") as f:
+    with open("datos_espectro_fe55_prob_ajust.csv", "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["Energia_eV", "Electrones"])
         
@@ -82,7 +82,7 @@ def main():
                 
                 # Haz colimado restrictivo a la zona central limpia (r = 0.2 cm)
                 phi = random.uniform(0, 2 * math.pi)
-                r = random.uniform(0, 0.2)  
+                r = random.uniform(0, 0.8)  
                 x0, y0 = r * math.cos(phi), r * math.sin(phi)
                 
                 nPrimaryElectrons = ctypes.c_int(0)
@@ -119,10 +119,10 @@ def main():
             gc.collect()
 
     # 6. Guardado final
-    cHist = ROOT.TCanvas("cHist", "Espectro Colimado", 800, 600)
+    cHist = ROOT.TCanvas("cHist", "Espectro", 800, 600)
     hEspectro.SetFillColor(ROOT.kGreen - 3)
     hEspectro.Draw()
-    cHist.SaveAs("resolucion_fe55_colimado.png")
+    cHist.SaveAs("resolucion_fe55_prob_ajust.png")
     print("\nSimulación colimada finalizada con éxito.")
 
 if __name__ == "__main__":
