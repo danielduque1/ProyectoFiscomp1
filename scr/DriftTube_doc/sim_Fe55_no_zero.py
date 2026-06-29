@@ -29,7 +29,7 @@ def main():
     if not gas.LoadGasFile("ar_70_co2_30.gas"):
         print("[Error] No se pudo cargar ar_70_co2_30.gas")
         sys.exit(1)
-    gas.EnablePenningTransfer(0.10, 0.0, "ar")
+    gas.EnablePenningTransfer(0.30, 0.0, "ar")
 
     # 2. Configuración Elmer
     elm = ComponentElmer2d(
@@ -61,16 +61,16 @@ def main():
 
     # 4. Configuración del espectro
     fe55_energies = [6403.84, 6390.84, 7058.0]
-    weights = [0.5, 0.15, 0.35]
+    weights = [0.45, 0.20, 0.35]
 
     # Histograma para la versión colimada
     hEspectro = ROOT.TH1F("hEspectro", "Espectro Fe55 Colimado (r=0.2);Electrones;Frecuencia", 100, 0, 500000)
 
     # 5. Bucle con escritura dinámica y re-intento
-    n_eventos = 500
+    n_eventos = 5000
     print(f"\n--- Iniciando captura de {n_eventos} eventos COLIMADOS (r = 0.2 cm) ---")
 
-    with open("datos_espectro_fe55_prob_ajust.csv", "w", newline="") as f:
+    with open("datos_espectro_fe55_5000.csv", "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["Energia_eV", "Electrones"])
         
@@ -122,7 +122,7 @@ def main():
     cHist = ROOT.TCanvas("cHist", "Espectro", 800, 600)
     hEspectro.SetFillColor(ROOT.kGreen - 3)
     hEspectro.Draw()
-    cHist.SaveAs("resolucion_fe55_prob_ajust.png")
+    cHist.SaveAs("resolucion_fe55_5000.png")
     print("\nSimulación colimada finalizada con éxito.")
 
 if __name__ == "__main__":

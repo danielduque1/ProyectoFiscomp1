@@ -18,7 +18,7 @@ def visualizar_histograma(archivo_csv):
     sns.histplot(
         data=df,
         x='Electrones',
-        bins=80,
+        bins=120,
         multiple='layer',
         element='bars',
         stat='count',
@@ -36,7 +36,7 @@ def visualizar_histograma(archivo_csv):
         data=df,
         x='Electrones',
         hue='Energia_etiqueta',
-        bins=80,
+        bins=120,
         multiple='layer',
         element='bars',
         stat='count',
@@ -46,7 +46,7 @@ def visualizar_histograma(archivo_csv):
     )
     
     # 3. Etiquetas y estética
-    plt.title('Distribución de Carga Recolectada por Energía (Espectro Fe-55)', fontsize=14)
+    plt.title('Distribución de Carga Recolectada por Energía', fontsize=14)
     plt.xlabel('Número de electrones recolectados', fontsize=12)
     plt.ylabel('Frecuencia (Conteos)', fontsize=12)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -55,31 +55,10 @@ def visualizar_histograma(archivo_csv):
     print("Mostrando histograma... Cierra la ventana para terminar.")
     plt.show()
 
-    # Histograma solo para Energia_eV = 7058.0
-    df_7058 = df[df['Energia_eV'] == 7058.0]
-
-    if not df_7058.empty:
-        plt.figure(figsize=(10, 6))
-        sns.histplot(
-            data=df_7058,
-            x='Electrones',
-            bins=80,
-            color='crimson',
-            edgecolor='black',
-            alpha=0.8,
-        )
-        plt.title('Histograma de Carga Recolectada para Energia_eV = 7058.0', fontsize=14)
-        plt.xlabel('Número de electrones recolectados', fontsize=12)
-        plt.ylabel('Frecuencia (Conteos)', fontsize=12)
-        plt.grid(axis='y', linestyle='--', alpha=0.7)
-
-        print("Mostrando histograma de 7058.0... Cierra la ventana para terminar.")
-        plt.show()
-    else:
-        print("No hay datos para Energia_eV = 7058.0 después de filtrar Electrones != 0.")
 
 if __name__ == "__main__":
-    archivo1 = "datos_espectro_fe55_colimado_prob_ajust.csv"
-    archivo2 = "datos_espectro_fe55_prob_ajust.csv"
+    archivo1 = "datos_espectro_fe55_5000.csv"
+    archivo2 = "datos_espectro_fe55_prob5000.csv"
+
     visualizar_histograma(archivo1)
     visualizar_histograma(archivo2)

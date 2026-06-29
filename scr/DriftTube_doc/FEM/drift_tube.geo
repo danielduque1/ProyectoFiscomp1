@@ -3,7 +3,7 @@
 // =========================================================================
 
 // Parámetros físicos en centímetros (cm)
-R_a = 0.002;  // Radio del alambre (Ánodo): 20 um
+R_a = 0.0015;  // Radio del alambre (Ánodo): 15 um
 R_b = 1.0;    // Radio del tubo exterior (Cátodo): 1 cm
 
 // Tamaños característicos de los elementos de malla (lc)
